@@ -26,7 +26,7 @@ public class AppSpringDataTest {
 		usuarioSpringData.setIdade(31);
 		usuarioSpringData.setLogin("teste 123");
 		usuarioSpringData.setSenha("123");
-		usuarioSpringData.setNome("Marcos");
+		usuarioSpringData.setNome("Willian");
 		
 		interfaceSpringDataUser.save(usuarioSpringData);
 		
@@ -82,7 +82,6 @@ public class AppSpringDataTest {
 	
 	@Test
 	public void testeConsultaNome() {
-		
 		List<UsuarioSpringData> list = interfaceSpringDataUser.buscaPorNome("Marcos");
 		
 		for (UsuarioSpringData usuarioSpringData : list) {
@@ -97,8 +96,7 @@ public class AppSpringDataTest {
 	}
 	
 	@Test
-	public void testeConsultaNomeParam() {
-		
+	public void testeConsultaNomeParam() {	
 		UsuarioSpringData usuarioSpringData = interfaceSpringDataUser.buscaPorNomeParam("Fernando");
 		
 			System.out.println("Id: " + usuarioSpringData.getId());
@@ -108,6 +106,10 @@ public class AppSpringDataTest {
 			System.out.println("Nome: " + usuarioSpringData.getNome());
 			System.out.println("Senha: " + usuarioSpringData.getSenha());
 			System.out.println("----------------------------------------------");
-		
+	}
+	
+	@Test
+	public void testeDeletePorNome() {
+		interfaceSpringDataUser.deletePorNome("Marcos");
 	}
 }
