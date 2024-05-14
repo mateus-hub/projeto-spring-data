@@ -43,4 +43,20 @@ public class AppSpringDataTest {
 		System.out.println("Nome: " + usuarioSpringData.get().getNome());
 		System.out.println("Senha: " + usuarioSpringData.get().getSenha());
 	}
+	
+	@Test
+	public void testeConsultaTodos() {
+		Iterable<UsuarioSpringData> lista = interfaceSpringDataUser.findAll();
+		
+		System.out.println("Imprimindo dados de todos usuarios");
+		for (UsuarioSpringData usuarioSpringData : lista) {
+			System.out.println("Id: " + usuarioSpringData.getId());
+			System.out.println("Email: " + usuarioSpringData.getEmail());
+			System.out.println("Idade: " + usuarioSpringData.getIdade());
+			System.out.println("Login: " + usuarioSpringData.getLogin());
+			System.out.println("Nome: " + usuarioSpringData.getNome());
+			System.out.println("Senha: " + usuarioSpringData.getSenha());
+			System.out.println("----------------------------------------------");
+		}
+	}
 }
