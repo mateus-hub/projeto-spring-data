@@ -69,7 +69,13 @@ public class AppSpringDataTest {
 		data.setNome("Mateus nome atualizado");
 		data.setIdade(25);
 		
-		interfaceSpringDataUser.save(data);
-				
+		interfaceSpringDataUser.save(data);		
+	}
+	
+	@Test
+	public void testeDelete() {
+		Optional<UsuarioSpringData> usuarioSpringData = interfaceSpringDataUser.findById(3L);
+		
+		interfaceSpringDataUser.delete(usuarioSpringData.get());
 	}
 }
