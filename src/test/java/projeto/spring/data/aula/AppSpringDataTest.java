@@ -10,6 +10,8 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import projeto.spring.data.aula.dao.InterfaceSpringDataUser;
+import projeto.spring.data.aula.dao.InterfaceTelefone;
+import projeto.spring.data.aula.model.Telefone;
 import projeto.spring.data.aula.model.UsuarioSpringData;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -18,6 +20,9 @@ public class AppSpringDataTest {
 
 	@Autowired
 	private InterfaceSpringDataUser interfaceSpringDataUser;
+	
+	@Autowired
+	private InterfaceTelefone interfaceTelefone;
 	
 	@Test
 	public void testeInsert() {
@@ -43,6 +48,15 @@ public class AppSpringDataTest {
 		System.out.println("Login: " + usuarioSpringData.get().getLogin());
 		System.out.println("Nome: " + usuarioSpringData.get().getNome());
 		System.out.println("Senha: " + usuarioSpringData.get().getSenha());
+		
+		System.out.println("\nTelefones: ");
+		for (Telefone telefone : usuarioSpringData.get().getTelefones()) {
+			System.out.println("-------------------");
+			System.out.println("Numero: " + telefone.getNumero());
+			System.out.println("Tipo: " + telefone.getTipo());
+			System.out.println("Id: " + telefone.getId());
+			System.out.println("Nome do usuario: " + telefone.getUsuarioSpringData().getNome());
+		}
 	}
 	
 	@Test
@@ -67,7 +81,7 @@ public class AppSpringDataTest {
 		
 		UsuarioSpringData data = usuarioSpringData.get();
 		
-		data.setNome("Mateus nome atualizado");
+		data.setNome("Mateus Freire");
 		data.setIdade(25);
 		
 		interfaceSpringDataUser.save(data);		
@@ -116,5 +130,17 @@ public class AppSpringDataTest {
 	@Test
 	public void testeUpdateEmailPorNome() {
 		interfaceSpringDataUser.updateEmailPorNome("fernando@gmail.com", "Fernando");
+	}
+	
+	@Test
+	public void testeInsertTelefone() {
+		Optional<UsuarioSpringData> usuarioSpringData = interfaceSpringDataUser.findById(2L);
+		
+		Telefone telefone = new Telefone();
+		telefone.setTipo("Casa");
+		telefone.setNumero("76538568736");
+		telefone.setUsuarioSpringData(usuarioSpringData.get());
+		
+		interfaceTelefone.save(telefone);
 	}
 }
